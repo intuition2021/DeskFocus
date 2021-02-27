@@ -94,7 +94,7 @@ class Ui_MainWindow(object):
     def stopTimer(self):
         print("Timer stopped!")
         self.flagTimer = False
-        self.timeRequired = 3 #int(self.spinBox_pom_min.text()) * 60
+        self.timeRequired = int(self.spinBox_pom_min.text()) * 60
         self.label_current_time
         # self.timerRunning = False
 
@@ -116,12 +116,13 @@ class Ui_MainWindow(object):
 
         if ((self.timeRequired == 0) and (self.msgDelievered == False)):
             self.timesUpMsg = QtWidgets.QMessageBox()
+            self.timesUpMsg.resize(300, 250)
             self.timesUpMsg.setWindowTitle("Times Up!")
 
             if (self.isStudy):
                 self.timesUpMsg.setText("Time for a break!")
             else:
-                self.timesUpMsg.setText("Back to work!")
+                self.timesUpMsg.setText("Get back to work!")
             x = self.timesUpMsg.exec_()
             self.msgDelievered = True
 
