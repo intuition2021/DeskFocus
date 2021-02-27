@@ -1,13 +1,16 @@
+# -*- coding: utf-8 -*-
+
+
+######## imports ########
+
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QAction, QTabWidget, QVBoxLayout
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 
-# -*- coding: utf-8 -*-
+from PyDictionary import PyDictionary
 
-from PyQt5 import QtWidgets
-
-### SAMPLE CODE FOR TESTING
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import QDateTime, Qt, QTimer
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
@@ -20,6 +23,12 @@ from PyQt5.QtWidgets import QMainWindow, QLabel
 from PyQt5.QtWidgets import QGridLayout, QWidget, QDesktopWidget
 
 import tkinter as tk
+
+
+######## Constants ########
+
+dictonary_options_list = ["definition", "synonym", "antonym"]
+
 
 ######## Class for the main window ########
 
@@ -37,8 +46,8 @@ class App(QMainWindow):
         self.title = 'DeskFocus'
         self.left = 0
         self.top = 0
-        self.width = self.screen_width/2
-        self.height = self.screen_height * 2/3
+        self.width = self.screen_width/4
+        self.height = self.screen_height/4
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
@@ -62,6 +71,13 @@ class MyTableWidget(QWidget):
 
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
+
+        self.originalPalette = QApplication.palette()
+
+        styleComboBox = QComboBox()
+        styleComboBox.addItems(QStyleFactory.keys())
+
+
         self.layout = QVBoxLayout(self)
 
         # Initialize tab screen
@@ -80,9 +96,29 @@ class MyTableWidget(QWidget):
         self.tab_dictionary.layout.addWidget(self.pushButton1)
         self.tab_dictionary.setLayout(self.tab_dictionary.layout)
 
+        self.createDictionaryBox()
+
         # Add tabs to widget
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
+
+    def createDictionaryBox(self):
+        self.dict_layout = QtWidgets.QGridLayout()
+
+        # create dictionary options dropdown
+        self.dictionary_dropdown = QtWidgets.QComboBox(self.tab_dictionary)
+
+        # add options for dictionary
+        self.dictionary_dropdown.addItems(dictonary_options_list)
+
+        # adjust parameters of dictionary options dropdown
+        self.dictionary_dropdown.setMaximumSize(QtCore.QSize(407, 16777215))
+        self.dictionary_dropdown.setObjectName("dictionary_dropdown")
+
+        self.dict_layout.addWidget(self.dictionary_dropdown, 0, 1, 1, 1)
+
+
+
 
     @pyqtSlot()
     def on_click(self):
