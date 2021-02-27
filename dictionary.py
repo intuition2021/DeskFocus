@@ -9,17 +9,18 @@ while True:
 
     if command == '0':
         break
-    elif command != '1' or command != '2' or command != '3':
-        print("Invalid command")
-        continue
-
-    word = input("Please input word: \n")
 
     if command == '1':
+        word = input("Please input word: \n")
         print(dictionary.meaning(word))
     elif command == '2':
+        word = input("Please input word: \n")
         print(dictionary.synonym(word))
     elif command == '3':
+        word = input("Please input word: \n")
         print(dictionary.antonym(word))
+    else:
+        print("Invalid command\n")
+        continue
 
 
