@@ -395,80 +395,80 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_dictionary, "")
 
-        # to do list tab
-        self.tab_todo = QtWidgets.QWidget()
-        self.tab_todo.setObjectName("tab_todo")
+        # # to do list tab
+        # self.tab_todo = QtWidgets.QWidget()
+        # self.tab_todo.setObjectName("tab_todo")
+        #
+        # self.gridLayout = QtWidgets.QGridLayout(self.tab_todo)
+        # self.gridLayout.setObjectName("gridLayout")
+        #
+        # self.spinBox_index_selector_delete = QtWidgets.QSpinBox(self.tab_todo)
+        # self.spinBox_index_selector_delete.setMinimum(1)
+        # self.spinBox_index_selector_delete.setObjectName("spinBox_index_selector_delete")
+        # self.gridLayout.addWidget(self.spinBox_index_selector_delete, 5, 3, 1, 1)
+        #
+        # self.label_8 = QtWidgets.QLabel(self.tab_todo)
+        # self.label_8.setObjectName("label_8")
+        # self.gridLayout.addWidget(self.label_8, 3, 1, 1, 1)
+        #
+        # self.lineEdit_addtask = QtWidgets.QLineEdit(self.tab_todo)
+        # self.lineEdit_addtask.setObjectName("lineEdit_addtask")
+        # self.gridLayout.addWidget(self.lineEdit_addtask, 0, 3, 1, 1)
+        #
+        # self.dateEdit_duedaete = QtWidgets.QDateEdit(self.tab_todo)
+        # self.dateEdit_duedaete.setObjectName("dateEdit_duedaete")
+        # self.gridLayout.addWidget(self.dateEdit_duedaete, 2, 3, 1, 1)
+        #
+        # self.label_7 = QtWidgets.QLabel(self.tab_todo)
+        # self.label_7.setObjectName("label_7")
+        # self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
+        #
+        # self.spinBox_priority = QtWidgets.QSpinBox(self.tab_todo)
+        # self.spinBox_priority.setMinimum(1)
+        # self.spinBox_priority.setMaximum(5)
+        # self.spinBox_priority.setObjectName("spinBox_priority")
+        # self.gridLayout.addWidget(self.spinBox_priority, 3, 3, 1, 1)
+        #
+        # self.pushButton_addtask = QtWidgets.QPushButton(self.tab_todo)
+        # self.pushButton_addtask.setObjectName("pushButton_addtask")
+        # self.gridLayout.addWidget(self.pushButton_addtask, 3, 4, 1, 1)
+        #
+        # self.label_10 = QtWidgets.QLabel(self.tab_todo)
+        # self.label_10.setObjectName("label_10")
+        # self.gridLayout.addWidget(self.label_10, 5, 1, 1, 1)
+        #
+        # self.pushButton_completedtask = QtWidgets.QPushButton(self.tab_todo)
+        # self.pushButton_completedtask.setObjectName("pushButton_completedtask")
+        # self.gridLayout.addWidget(self.pushButton_completedtask, 5, 4, 1, 1)
+        #
+        # self.scrollArea_listtasks = QtWidgets.QScrollArea(self.tab_todo)
+        # self.scrollArea_listtasks.setWidgetResizable(True)
+        # self.scrollArea_listtasks.setObjectName("scrollArea_listtasks")
+        # self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
+        # self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 516, 184))
+        # self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
+        # self.scrollArea_listtasks.setWidget(self.scrollAreaWidgetContents_2)
+        # self.gridLayout.addWidget(self.scrollArea_listtasks, 4, 1, 1, 4)
+        #
+        # self.label_9 = QtWidgets.QLabel(self.tab_todo)
+        # self.label_9.setObjectName("label_9")
+        # self.gridLayout.addWidget(self.label_9, 2, 1, 1, 1)
+        #
+        # self.label_11 = QtWidgets.QLabel(self.tab_todo)
+        # self.label_11.setObjectName("label_11")
+        # self.gridLayout.addWidget(self.label_11, 6, 1, 1, 1)
+        #
+        # self.progressBar = QtWidgets.QProgressBar(self.tab_todo)
+        # self.progressBar.setProperty("value", 3)
+        # self.progressBar.setObjectName("progressBar")
+        # self.gridLayout.addWidget(self.progressBar, 6, 2, 1, 3)
+        #
+        # self.tabWidget.addTab(self.tab_todo, "")
 
-        self.gridLayout = QtWidgets.QGridLayout(self.tab_todo)
-        self.gridLayout.setObjectName("gridLayout")
-
-        self.spinBox_index_selector_delete = QtWidgets.QSpinBox(self.tab_todo)
-        self.spinBox_index_selector_delete.setMinimum(1)
-        self.spinBox_index_selector_delete.setObjectName("spinBox_index_selector_delete")
-        self.gridLayout.addWidget(self.spinBox_index_selector_delete, 5, 3, 1, 1)
-
-        self.label_8 = QtWidgets.QLabel(self.tab_todo)
-        self.label_8.setObjectName("label_8")
-        self.gridLayout.addWidget(self.label_8, 3, 1, 1, 1)
-
-        self.lineEdit_addtask = QtWidgets.QLineEdit(self.tab_todo)
-        self.lineEdit_addtask.setObjectName("lineEdit_addtask")
-        self.gridLayout.addWidget(self.lineEdit_addtask, 0, 3, 1, 1)
-
-        self.dateEdit_duedaete = QtWidgets.QDateEdit(self.tab_todo)
-        self.dateEdit_duedaete.setObjectName("dateEdit_duedaete")
-        self.gridLayout.addWidget(self.dateEdit_duedaete, 2, 3, 1, 1)
-
-        self.label_7 = QtWidgets.QLabel(self.tab_todo)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
-
-        self.spinBox_priority = QtWidgets.QSpinBox(self.tab_todo)
-        self.spinBox_priority.setMinimum(1)
-        self.spinBox_priority.setMaximum(5)
-        self.spinBox_priority.setObjectName("spinBox_priority")
-        self.gridLayout.addWidget(self.spinBox_priority, 3, 3, 1, 1)
-
-        self.pushButton_addtask = QtWidgets.QPushButton(self.tab_todo)
-        self.pushButton_addtask.setObjectName("pushButton_addtask")
-        self.gridLayout.addWidget(self.pushButton_addtask, 3, 4, 1, 1)
-
-        self.label_10 = QtWidgets.QLabel(self.tab_todo)
-        self.label_10.setObjectName("label_10")
-        self.gridLayout.addWidget(self.label_10, 5, 1, 1, 1)
-
-        self.pushButton_completedtask = QtWidgets.QPushButton(self.tab_todo)
-        self.pushButton_completedtask.setObjectName("pushButton_completedtask")
-        self.gridLayout.addWidget(self.pushButton_completedtask, 5, 4, 1, 1)
-
-        self.scrollArea_listtasks = QtWidgets.QScrollArea(self.tab_todo)
-        self.scrollArea_listtasks.setWidgetResizable(True)
-        self.scrollArea_listtasks.setObjectName("scrollArea_listtasks")
-        self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 516, 184))
-        self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        self.scrollArea_listtasks.setWidget(self.scrollAreaWidgetContents_2)
-        self.gridLayout.addWidget(self.scrollArea_listtasks, 4, 1, 1, 4)
-
-        self.label_9 = QtWidgets.QLabel(self.tab_todo)
-        self.label_9.setObjectName("label_9")
-        self.gridLayout.addWidget(self.label_9, 2, 1, 1, 1)
-
-        self.label_11 = QtWidgets.QLabel(self.tab_todo)
-        self.label_11.setObjectName("label_11")
-        self.gridLayout.addWidget(self.label_11, 6, 1, 1, 1)
-
-        self.progressBar = QtWidgets.QProgressBar(self.tab_todo)
-        self.progressBar.setProperty("value", 3)
-        self.progressBar.setObjectName("progressBar")
-        self.gridLayout.addWidget(self.progressBar, 6, 2, 1, 3)
-
-        self.tabWidget.addTab(self.tab_todo, "")
-
-        # about us tab
-        self.tab_about_us = QtWidgets.QWidget()
-        self.tab_about_us.setObjectName("tab_about_us")
-        self.tabWidget.addTab(self.tab_about_us, "")
+        # # about us tab
+        # self.tab_about_us = QtWidgets.QWidget()
+        # self.tab_about_us.setObjectName("tab_about_us")
+        # self.tabWidget.addTab(self.tab_about_us, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
 
@@ -507,15 +507,15 @@ class Ui_MainWindow(object):
         self.label_result_2.setText(_translate("MainWindow", "Result"))
         self.label_searchtern_2.setText(_translate("MainWindow", "Search term"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_dictionary), _translate("MainWindow", "Dictionary"))
-        self.label_8.setText(_translate("MainWindow", "Priority"))
-        self.label_7.setText(_translate("MainWindow", "Task"))
-        self.pushButton_addtask.setText(_translate("MainWindow", "Add Task"))
-        self.label_10.setText(_translate("MainWindow", "Index"))
-        self.pushButton_completedtask.setText(_translate("MainWindow", "Completed!"))
-        self.label_9.setText(_translate("MainWindow", "Due Date"))
-        self.label_11.setText(_translate("MainWindow", "Almost there!"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
+        # self.label_8.setText(_translate("MainWindow", "Priority"))
+        # self.label_7.setText(_translate("MainWindow", "Task"))
+        # self.pushButton_addtask.setText(_translate("MainWindow", "Add Task"))
+        # self.label_10.setText(_translate("MainWindow", "Index"))
+        # self.pushButton_completedtask.setText(_translate("MainWindow", "Completed!"))
+        # self.label_9.setText(_translate("MainWindow", "Due Date"))
+        # self.label_11.setText(_translate("MainWindow", "Almost there!"))
+        # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
+        # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
 
     def closeEvent(self, event):
         self.stopTimer()
