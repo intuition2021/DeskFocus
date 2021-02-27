@@ -5,9 +5,14 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
+import ctypes
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyDictionary import PyDictionary
+import logging
+from threading import Thread
+import time
+import sys
 
 dictonary_options_list = ["definition", "synonym", "antonym"]
 
@@ -23,14 +28,54 @@ class Ui_MainWindow(object):
             self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
 
     def startTimer(self):
-        # self.spin.text()
-        pass
+        self.timerRunning = True
+
+        if self.timerPaused:
+            self.timerPaused = False
+        else:
+            self.timeRequired = int(self.spinBox_pom_min.text()) * 60
+
+        # # Thread execution point
+        print("Launching a worker thread...")
+        if self.thread is not None:
+            self.ui.close()
+            self.thread.join()
+
+        if not self.threadRunning:
+            self.thread = Thread(target=self.timerCountingDown())
+            self.thread.start()
+            print("Launched!")
+
+    def timerCountingDown(self):
+        _translate = QtCore.QCoreApplication.translate
+        print("timer is counting down")
+        while self.timerRunning:
+            print("timer entered while")
+            if self.timerPaused:
+                print("stuck in paused")
+                continue
+            elif self.timeRequired:
+                mins, secs = divmod(self.timeRequired, 60)
+                hours, mins = divmod(mins, 60)
+                timer = '{:02d}:{:02d}:{:02d}'.format(hours, mins, secs)
+                print(timer)
+                self.label_current_time.setText(_translate("MainWindow", timer))
+                self.timeRequired -= 1
+                print("tick")
+            else:
+                print("times up!")
+                self.timerRunning = False
+                break
+
+            time.sleep(1)
 
     def pauseTimer(self):
-        pass
+        print("Timer paused!")
+        self.timerPaused = True
 
     def stopTimer(self):
-        pass
+        print("Timer stopped!")
+        self.timerRunning = False
 
     def searchForWord(self):
         _translate = QtCore.QCoreApplication.translate
@@ -56,6 +101,12 @@ class Ui_MainWindow(object):
 
 
     def setupUi(self, MainWindow):
+        self.thread = None
+        self.threadRunning = False
+
+        myappid = u'mycompany.myproduct.subproduct.version'  # arbitrary string
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(560, 454)
 
@@ -70,6 +121,10 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
+
+        self.timerRunning = False
+        self.timerPaused = False
+        self.timeRequired = 0
 
         # pomodoro tab
         self.tab_pomodoro = QtWidgets.QWidget()
@@ -406,11 +461,23 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
-    import sys
+    format = "%(asctime)s: %(message)s"
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    # MainWindow.hide()
+
+    # # SplashScreenWindow
+    # splash_screen_window = SplashScreenWindow(MainWindow)
+    # splash_screen_window.show()
+    # QTimer.singleShot(2500, splash_screen_window.close)
+
+    # Run the application!
     sys.exit(app.exec_())
+
+
 
