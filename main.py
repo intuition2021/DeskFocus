@@ -208,11 +208,11 @@ if __name__ == '__main__':
 
     import sys
 
-#     app = QApplication(sys.argv)
+    # app = QApplication(sys.argv)
     app = QtWidgets.QApplication(sys.argv)
-    with open("./pyqt/ManjaroMix.qss", "r") as file:
-        qss = file.read()
-        app.setStyleSheet(qss)
+    # with open("./pyqt/ManjaroMix.qss", "r") as file:
+    #     qss = file.read()
+    #     app.setStyleSheet(qss)
 
     gallery = WidgetGallery()
     gallery.show()
