@@ -21,32 +21,24 @@ from PyQt5.QtWidgets import QGridLayout, QWidget, QDesktopWidget
 
 import tkinter as tk
 
-######## Function to get center ########
-
-# set placeholder values
-screen_width = 1000
-screen_height = 1000
-
-def get_dimensions():
-    root = tk.Tk()
-
-    screen_width = root.winfo_screenwidth()
-    print(screen_width)
-    screen_height = root.winfo_screenheight()
-    print(screen_height)
-
 ######## Class for the main window ########
 
 class App(QMainWindow):
+    def get_dimensions(self):
+        root = tk.Tk()
+        self.screen_width = root.winfo_screenwidth()
+        self.screen_height = root.winfo_screenheight()
 
     def __init__(self):
         super().__init__()
 
+        self.get_dimensions()
+
         self.title = 'DeskFocus'
         self.left = 0
         self.top = 0
-        self.width = 500
-        self.height = 400
+        self.width = self.screen_width/2
+        self.height = self.screen_height * 2/3
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
@@ -74,19 +66,19 @@ class MyTableWidget(QWidget):
 
         # Initialize tab screen
         self.tabs = QTabWidget()
-        self.tab1 = QWidget()
-        self.tab2 = QWidget()
+        self.tab_dictionary = QWidget()
+        self.tab_tasklist = QWidget()
         self.tabs.resize(300, 200)
 
         # Add tabs
-        self.tabs.addTab(self.tab1, "📖 Dictionary")
-        self.tabs.addTab(self.tab2, "🗎 Task List")
+        self.tabs.addTab(self.tab_dictionary, "📖 Dictionary")
+        self.tabs.addTab(self.tab_tasklist, "🗎 Task List")
 
         # Create first tab
-        self.tab1.layout = QVBoxLayout(self)
+        self.tab_dictionary.layout = QVBoxLayout(self)
         self.pushButton1 = QPushButton("PyQt5 button")
-        self.tab1.layout.addWidget(self.pushButton1)
-        self.tab1.setLayout(self.tab1.layout)
+        self.tab_dictionary.layout.addWidget(self.pushButton1)
+        self.tab_dictionary.setLayout(self.tab_dictionary.layout)
 
         # Add tabs to widget
         self.layout.addWidget(self.tabs)
@@ -100,7 +92,6 @@ class MyTableWidget(QWidget):
 
 
 if __name__ == '__main__':
-    get_dimensions()
     app = QApplication(sys.argv)
     ex = App()
     sys.exit(app.exec_())

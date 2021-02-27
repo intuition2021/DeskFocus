@@ -194,4 +194,11 @@ class WidgetGallery(QDialog):
         timer.start(1000)
 
 
+if __name__ == '__main__':
 
+    import sys
+
+    app = QApplication(sys.argv)
+    gallery = WidgetGallery()
+    gallery.show()
+    sys.exit(app.exec_())
