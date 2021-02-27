@@ -58,6 +58,9 @@ def createSysInfo(daySelected, startTime, endTime):
         sysInfo = ast.literal_eval(file.read())
         systemInfo["days"] = sysInfo["days"]
         systemInfo["time"] = sysInfo["time"]
+        daysNeeded = systemInfo["days"]
+        timeStamp = systemInfo["time"]
+
 
     if daySelected not in daysNeeded:
         daysNeeded.append(daySelected)
