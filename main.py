@@ -8,11 +8,14 @@
 import ctypes
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from PyDictionary import PyDictionary
 import logging
 from threading import Thread
 import time
 import sys
+import os
 
 dictonary_options_list = ["definition", "synonym", "antonym"]
 
@@ -28,29 +31,40 @@ class Ui_MainWindow(object):
             self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
 
     def startTimer(self):
-        self.timerRunning = True
+        self.flagTimer = True
+        # _translate = QtCore.QCoreApplication.translate
+        # self.timerRunning = True
+        #
+        # if self.timerPaused:
+        #     self.timerPaused = False
+        # else:
+        #     self.timeRequired = int(self.spinBox_pom_min.text()) * 60
 
-        if self.timerPaused:
-            self.timerPaused = False
-        else:
-            self.timeRequired = int(self.spinBox_pom_min.text()) * 60
+        # child = os.fork()
+        #
+        # if child == 0:
+        #     self.timerCountingDown()
 
-        # # Thread execution point
-        print("Launching a worker thread...")
-        if self.thread is not None:
-            self.ui.close()
-            self.thread.join()
-
-        if not self.threadRunning:
-            self.thread = Thread(target=self.timerCountingDown())
-            self.thread.start()
-            print("Launched!")
+        # # # Thread execution point
+        # print("Launching a worker thread...")
+        # if self.thread is not None:
+        #     self.thread.join()
+        #     print("thread joined")
+        #
+        # self.label_current_time.setText(_translate("MainWindow", "what"))
+        #
+        # if not self.threadRunning:
+        #     self.thread = Thread(target=self.timerCountingDown(), args=())
+        #     self.thread.daemon = True
+        #     self.thread.start()
+        #     print("Launched!")
 
     def timerCountingDown(self):
         _translate = QtCore.QCoreApplication.translate
         print("timer is counting down")
         while self.timerRunning:
             print("timer entered while")
+            self.label_current_time.setText(_translate("MainWindow", "Nice"))
             if self.timerPaused:
                 print("stuck in paused")
                 continue
@@ -60,22 +74,39 @@ class Ui_MainWindow(object):
                 timer = '{:02d}:{:02d}:{:02d}'.format(hours, mins, secs)
                 print(timer)
                 self.label_current_time.setText(_translate("MainWindow", timer))
-                self.timeRequired -= 1
+                self.timeRequired -= 5
                 print("tick")
             else:
                 print("times up!")
                 self.timerRunning = False
                 break
 
-            time.sleep(1)
+            time.sleep(5)
 
     def pauseTimer(self):
         print("Timer paused!")
-        self.timerPaused = True
+        self.flagTimer = False
+        # self.timerPaused = True
 
     def stopTimer(self):
         print("Timer stopped!")
-        self.timerRunning = False
+        self.flagTimer = False
+        self.timeRequired = 0
+        self.label_current_time
+        # self.timerRunning = False
+
+    # method called by timer
+    def showTime(self):
+        # checking if flag is true
+        if self.flagTimer:
+            # incrementing the counter
+            self.timeRequired += 1
+
+        # getting text from count
+        text = str(self.timeRequired / 10)
+
+        # showing text
+        self.label_current_time.setText(text)
 
     def searchForWord(self):
         _translate = QtCore.QCoreApplication.translate
@@ -103,6 +134,10 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.thread = None
         self.threadRunning = False
+        self.timerRunning = False
+        self.timerPaused = False
+        self.timeRequired = 0
+        self.flagTimer = False
 
         myappid = u'mycompany.myproduct.subproduct.version'  # arbitrary string
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
@@ -121,10 +156,6 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
-
-        self.timerRunning = False
-        self.timerPaused = False
-        self.timeRequired = 0
 
         # pomodoro tab
         self.tab_pomodoro = QtWidgets.QWidget()
@@ -175,11 +206,11 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addWidget(self.pushButton_3, 5, 0, 1, 2)
 
         # start timer
-        self.pb_start.clicked.connect(self.startTimer)
+        self.pb_start.pressed.connect(self.startTimer)
         # pause the timer
-        self.pb_pause.clicked.connect(self.pauseTimer)
+        self.pb_pause.pressed.connect(self.pauseTimer)
         # stop the timer
-        self.pushButton_3.clicked.connect(self.stopTimer)
+        self.pushButton_3.pressed.connect(self.stopTimer)
 
         # minutes word label
         self.label_min_pomo = QtWidgets.QLabel(self.tab_pomodoro)
@@ -198,6 +229,14 @@ class Ui_MainWindow(object):
 
         # setting calling method by button
         self.pushButton_study_toggle.clicked.connect(self.toggleStudy)
+
+        # creating a timer object
+        self.timer = QTimer(self.tab_pomodoro)
+
+        # adding action to timer
+        self.timer.timeout.connect(self.showTime)
+
+        self.timer.start(1000)
 
         self.tabWidget.addTab(self.tab_pomodoro, "")
 
@@ -459,6 +498,8 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
 
+    def closeEvent(self, event):
+        self.stopTimer()
 
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
