@@ -8,7 +8,29 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+dictonary_options_list = ["definition", "synonym", "antonym"]
+
 class Ui_MainWindow(object):
+
+    def toggleStudy(self):
+        _translate = QtCore.QCoreApplication.translate
+        if (self.isStudy):
+            self.isStudy = False
+            self.pushButton_study_toggle.setText(_translate("MainWindow", "Relaxing"))
+        else:
+            self.isStudy = True
+            self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
+
+    def startTimer(self):
+        # self.spin.text()
+        pass
+
+    def pauseTimer(self):
+        pass
+
+    def stopTimer(self):
+        pass
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(560, 454)
@@ -39,7 +61,7 @@ class Ui_MainWindow(object):
         self.spinBox_pom_min.setObjectName("spinBox_pom_min")
         self.gridLayout_6.addWidget(self.spinBox_pom_min, 0, 1, 1, 1)
 
-        # time label
+        # current time label
         self.label_current_time = QtWidgets.QLabel(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setFamily("Comic Sans MS")
@@ -73,6 +95,13 @@ class Ui_MainWindow(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout_6.addWidget(self.pushButton_3, 5, 0, 1, 2)
 
+        # setting calling method by button
+        self.pb_start.clicked.connect(self.startTimer)
+        # setting calling method by button
+        self.pb_pause.clicked.connect(self.pauseTimer)
+        # setting calling method by button
+        self.pushButton_3.clicked.connect(self.stopTimer)
+
         # minutes word label
         self.label_min_pomo = QtWidgets.QLabel(self.tab_pomodoro)
         font = QtGui.QFont()
@@ -83,9 +112,14 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addWidget(self.label_min_pomo, 0, 0, 1, 1)
 
         # study - relax toggle button
+        self.isStudy = True
         self.pushButton_study_toggle = QtWidgets.QPushButton(self.tab_pomodoro)
         self.pushButton_study_toggle.setObjectName("pushButton_study_toggle")
         self.gridLayout_6.addWidget(self.pushButton_study_toggle, 1, 0, 1, 2)
+
+        # setting calling method by button
+        self.pushButton_study_toggle.clicked.connect(self.toggleStudy)
+
         self.tabWidget.addTab(self.tab_pomodoro, "")
 
         # web blocker tab
@@ -156,6 +190,7 @@ class Ui_MainWindow(object):
         # dictionary tab
         self.tab_dictionary = QtWidgets.QWidget()
         self.tab_dictionary.setObjectName("tab_dictionary")
+
         self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_dictionary)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout_dictionary_2 = QtWidgets.QGridLayout()
@@ -163,17 +198,20 @@ class Ui_MainWindow(object):
         self.lineEdit_dictsearch_2 = QtWidgets.QLineEdit(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
+
         self.lineEdit_dictsearch_2.setFont(font)
         self.lineEdit_dictsearch_2.setText("")
         self.lineEdit_dictsearch_2.setDragEnabled(True)
         self.lineEdit_dictsearch_2.setObjectName("lineEdit_dictsearch_2")
         self.gridLayout_dictionary_2.addWidget(self.lineEdit_dictsearch_2, 2, 1, 1, 1)
+
         self.pushButton_dictsearch = QtWidgets.QPushButton(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_dictsearch.setFont(font)
         self.pushButton_dictsearch.setObjectName("pushButton_dictsearch")
         self.gridLayout_dictionary_2.addWidget(self.pushButton_dictsearch, 3, 0, 1, 2)
+
         self.label_lookup_2 = QtWidgets.QLabel(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -181,15 +219,20 @@ class Ui_MainWindow(object):
         self.label_lookup_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_lookup_2.setObjectName("label_lookup_2")
         self.gridLayout_dictionary_2.addWidget(self.label_lookup_2, 1, 0, 1, 1)
+
         self.comboBox_lookup_2_ = QtWidgets.QComboBox(self.tab_dictionary)
         self.comboBox_lookup_2_.setObjectName("comboBox_lookup_2_")
         self.gridLayout_dictionary_2.addWidget(self.comboBox_lookup_2_, 1, 1, 1, 1)
+        # add language list for original text
+        self.comboBox_lookup_2_.addItems(dictonary_options_list)
+
         self.textBrowser_dictresult_2 = QtWidgets.QTextBrowser(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.textBrowser_dictresult_2.setFont(font)
         self.textBrowser_dictresult_2.setObjectName("textBrowser_dictresult_2")
         self.gridLayout_dictionary_2.addWidget(self.textBrowser_dictresult_2, 4, 1, 1, 1)
+
         self.label_result_2 = QtWidgets.QLabel(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -197,6 +240,7 @@ class Ui_MainWindow(object):
         self.label_result_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_result_2.setObjectName("label_result_2")
         self.gridLayout_dictionary_2.addWidget(self.label_result_2, 4, 0, 1, 1)
+
         self.label_searchtern_2 = QtWidgets.QLabel(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -204,44 +248,56 @@ class Ui_MainWindow(object):
         self.label_searchtern_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_searchtern_2.setObjectName("label_searchtern_2")
         self.gridLayout_dictionary_2.addWidget(self.label_searchtern_2, 2, 0, 1, 1)
+
         self.gridLayout_2.addLayout(self.gridLayout_dictionary_2, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab_dictionary, "")
 
         # to do list tab
         self.tab_todo = QtWidgets.QWidget()
         self.tab_todo.setObjectName("tab_todo")
+
         self.gridLayout = QtWidgets.QGridLayout(self.tab_todo)
         self.gridLayout.setObjectName("gridLayout")
+
         self.spinBox_index_selector_delete = QtWidgets.QSpinBox(self.tab_todo)
         self.spinBox_index_selector_delete.setMinimum(1)
         self.spinBox_index_selector_delete.setObjectName("spinBox_index_selector_delete")
         self.gridLayout.addWidget(self.spinBox_index_selector_delete, 5, 3, 1, 1)
+
         self.label_8 = QtWidgets.QLabel(self.tab_todo)
         self.label_8.setObjectName("label_8")
         self.gridLayout.addWidget(self.label_8, 3, 1, 1, 1)
+
         self.lineEdit_addtask = QtWidgets.QLineEdit(self.tab_todo)
         self.lineEdit_addtask.setObjectName("lineEdit_addtask")
         self.gridLayout.addWidget(self.lineEdit_addtask, 0, 3, 1, 1)
+
         self.dateEdit_duedaete = QtWidgets.QDateEdit(self.tab_todo)
         self.dateEdit_duedaete.setObjectName("dateEdit_duedaete")
         self.gridLayout.addWidget(self.dateEdit_duedaete, 2, 3, 1, 1)
+
         self.label_7 = QtWidgets.QLabel(self.tab_todo)
         self.label_7.setObjectName("label_7")
         self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
+
         self.spinBox_priority = QtWidgets.QSpinBox(self.tab_todo)
         self.spinBox_priority.setMinimum(1)
         self.spinBox_priority.setMaximum(5)
         self.spinBox_priority.setObjectName("spinBox_priority")
         self.gridLayout.addWidget(self.spinBox_priority, 3, 3, 1, 1)
+
         self.pushButton_addtask = QtWidgets.QPushButton(self.tab_todo)
         self.pushButton_addtask.setObjectName("pushButton_addtask")
         self.gridLayout.addWidget(self.pushButton_addtask, 3, 4, 1, 1)
+
         self.label_10 = QtWidgets.QLabel(self.tab_todo)
         self.label_10.setObjectName("label_10")
         self.gridLayout.addWidget(self.label_10, 5, 1, 1, 1)
+
         self.pushButton_completedtask = QtWidgets.QPushButton(self.tab_todo)
         self.pushButton_completedtask.setObjectName("pushButton_completedtask")
         self.gridLayout.addWidget(self.pushButton_completedtask, 5, 4, 1, 1)
+
         self.scrollArea_listtasks = QtWidgets.QScrollArea(self.tab_todo)
         self.scrollArea_listtasks.setWidgetResizable(True)
         self.scrollArea_listtasks.setObjectName("scrollArea_listtasks")
@@ -250,23 +306,29 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.scrollArea_listtasks.setWidget(self.scrollAreaWidgetContents_2)
         self.gridLayout.addWidget(self.scrollArea_listtasks, 4, 1, 1, 4)
+
         self.label_9 = QtWidgets.QLabel(self.tab_todo)
         self.label_9.setObjectName("label_9")
         self.gridLayout.addWidget(self.label_9, 2, 1, 1, 1)
+
         self.label_11 = QtWidgets.QLabel(self.tab_todo)
         self.label_11.setObjectName("label_11")
         self.gridLayout.addWidget(self.label_11, 6, 1, 1, 1)
+
         self.progressBar = QtWidgets.QProgressBar(self.tab_todo)
         self.progressBar.setProperty("value", 3)
         self.progressBar.setObjectName("progressBar")
         self.gridLayout.addWidget(self.progressBar, 6, 2, 1, 3)
+
         self.tabWidget.addTab(self.tab_todo, "")
 
         # about us tab
         self.tab_about_us = QtWidgets.QWidget()
         self.tab_about_us.setObjectName("tab_about_us")
         self.tabWidget.addTab(self.tab_about_us, "")
+
         self.verticalLayout.addWidget(self.tabWidget)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -284,7 +346,7 @@ class Ui_MainWindow(object):
         self.pb_start.setText(_translate("MainWindow", "START"))
         self.pushButton_3.setText(_translate("MainWindow", "STOP"))
         self.label_min_pomo.setText(_translate("MainWindow", "Minutes"))
-        self.pushButton_study_toggle.setText(_translate("MainWindow", "Study"))
+        self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_pomodoro), _translate("MainWindow", "Pomodoro"))
         self.label_blocklist.setText(_translate("MainWindow", "BlockList"))
         self.label_2.setText(_translate("MainWindow", "Start blocking"))
