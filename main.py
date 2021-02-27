@@ -5,8 +5,14 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
-import ctypes
 
+import ast
+import json
+import os
+import time
+from datetime import datetime as dt
+from datetimerange import DateTimeRange
+import ctypes
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -19,7 +25,96 @@ import os
 
 dictonary_options_list = ["definition", "synonym", "antonym"]
 
+dayList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+hourList = []
+minList = []
+
+for i in range(0, 24):
+    strHr = str(i)
+    if len(strHr) == 1:
+        strHr = "0" + strHr
+
+    hourList.append(strHr)
+
+for i in range(0, 60):
+    strMin = str(i)
+    if len(strMin) == 1:
+        strMin = "0" + strMin
+
+    minList.append(strMin)
+
+
+def createSysInfo(daySelected, startTime, endTime):
+    systemInfo = {}
+
+    systemInfo['system'] = r'/private/etc/hosts'
+
+    # in GUI, create a text box for them to enter all the websites they want to block
+    # then over here, parse the information -> make it a json
+    blockSites = []
+
+    file = open("blockSites.txt", "r")
+    for f in file:
+        f = f.strip()
+        blockSites.append(f)
+
+    systemInfo["blockSites"] = blockSites
+
+    file = open("sysInfo.txt")
+
+    daysNeeded = []
+    sysInfo = ""
+    timeStamp = {}
+
+    if os.stat("sysInfo.txt").st_size != 0:
+        sysInfo = ast.literal_eval(file.read())
+        systemInfo["days"] = sysInfo["days"]
+        systemInfo["time"] = sysInfo["time"]
+        daysNeeded = systemInfo["days"]
+        timeStamp = systemInfo["time"]
+
+    if daySelected not in daysNeeded:
+        daysNeeded.append(daySelected)
+        systemInfo["days"] = daysNeeded
+
+    #if daySelected not in timeStamp:
+    timeStamp[daySelected] = [startTime, endTime]
+    systemInfo["time"] = timeStamp
+
+    newFile = json.dumps(systemInfo, indent=4)
+    with open("sysInfo.txt", "w") as x:
+        x.write(newFile)
+
+    bashCommand = "sudo python blocker.py"
+
+    child = os.fork()
+
+    if child == 0:
+        os.system(bashCommand)
+
 class Ui_MainWindow(object):
+
+    def on_click_blocker_btn(self):
+        # Add the days in the week
+        # self.comboBox_webday_dropdown.addItems(dayList)
+
+        # Get information for blocker
+        daySelected = self.comboBox_webday_dropdown.currentText()
+        startTime = self.comboBox_starthr.currentText() + ":" + self.comboBox_startmin.currentText()
+        endTime = self.comboBox_stophr.currentText() + ":" + self.comboBox_stopmin.currentText()
+
+        blockSites = self.plainTextEdit_sites.toPlainText()
+
+        file = open("blockSites.txt", "w+")
+        file.write(blockSites)
+        file.close()
+
+        print("things: {} {} {} {}".format(daySelected, startTime, endTime, blockSites))
+
+        createSysInfo(daySelected, startTime, endTime)
+
+        #worker = threading.Thread(target=createSysInfo(daySelected, startTime, endTime), args=(1,))
+        #worker.start()
 
     def toggleStudy(self):
         _translate = QtCore.QCoreApplication.translate
@@ -264,13 +359,12 @@ class Ui_MainWindow(object):
         self.tab_webblocker.setObjectName("tab_webblocker")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.tab_webblocker)
         self.gridLayout_5.setObjectName("gridLayout_5")
-        self.label_blocklist = QtWidgets.QLabel(self.tab_webblocker)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.label_blocklist.setFont(font)
-        self.label_blocklist.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_blocklist.setObjectName("label_blocklist")
-        self.gridLayout_5.addWidget(self.label_blocklist, 7, 0, 1, 1)
+        self.comboBox_starthr = QtWidgets.QComboBox(self.tab_webblocker)
+        self.comboBox_starthr.setObjectName("comboBox_starthr")
+        self.gridLayout_5.addWidget(self.comboBox_starthr, 2, 1, 1, 1)
+
+        self.comboBox_starthr.addItems(hourList)
+
         self.label_2 = QtWidgets.QLabel(self.tab_webblocker)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -278,12 +372,6 @@ class Ui_MainWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout_5.addWidget(self.label_2, 2, 0, 1, 1)
-        self.pushButton_web_update = QtWidgets.QPushButton(self.tab_webblocker)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.pushButton_web_update.setFont(font)
-        self.pushButton_web_update.setObjectName("pushButton_web_update")
-        self.gridLayout_5.addWidget(self.pushButton_web_update, 8, 0, 1, 2)
         self.label_6 = QtWidgets.QLabel(self.tab_webblocker)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -298,30 +386,53 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout_5.addWidget(self.label_3, 4, 0, 1, 1)
-        self.timeEdit = QtWidgets.QTimeEdit(self.tab_webblocker)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.timeEdit.setFont(font)
-        self.timeEdit.setObjectName("timeEdit")
-        self.gridLayout_5.addWidget(self.timeEdit, 2, 1, 1, 2)
+        self.comboBox_startmin = QtWidgets.QComboBox(self.tab_webblocker)
+        self.comboBox_startmin.setObjectName("comboBox_startmin")
+        self.gridLayout_5.addWidget(self.comboBox_startmin, 2, 2, 1, 1)
+
+        self.comboBox_startmin.addItems(minList)
+
         self.comboBox_webday_dropdown = QtWidgets.QComboBox(self.tab_webblocker)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.comboBox_webday_dropdown.setFont(font)
         self.comboBox_webday_dropdown.setObjectName("comboBox_webday_dropdown")
-        self.gridLayout_5.addWidget(self.comboBox_webday_dropdown, 1, 1, 1, 1)
-        self.timeEdit_2 = QtWidgets.QTimeEdit(self.tab_webblocker)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.timeEdit_2.setFont(font)
-        self.timeEdit_2.setObjectName("timeEdit_2")
-        self.gridLayout_5.addWidget(self.timeEdit_2, 4, 1, 1, 2)
+        self.comboBox_webday_dropdown.addItems(dayList)
+        self.gridLayout_5.addWidget(self.comboBox_webday_dropdown, 1, 1, 1, 2)
         self.plainTextEdit_sites = QtWidgets.QPlainTextEdit(self.tab_webblocker)
         font = QtGui.QFont()
         font.setPointSize(9)
         self.plainTextEdit_sites.setFont(font)
         self.plainTextEdit_sites.setObjectName("plainTextEdit_sites")
-        self.gridLayout_5.addWidget(self.plainTextEdit_sites, 7, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.plainTextEdit_sites, 5, 1, 1, 2)
+        self.label_blocklist = QtWidgets.QLabel(self.tab_webblocker)
+        self.label_blocklist.setMaximumSize(QtCore.QSize(90, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_blocklist.setFont(font)
+        self.label_blocklist.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_blocklist.setObjectName("label_blocklist")
+        self.gridLayout_5.addWidget(self.label_blocklist, 5, 0, 1, 1)
+        self.pushButton_web_update = QtWidgets.QPushButton(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_web_update.setFont(font)
+        self.pushButton_web_update.setObjectName("pushButton_web_update")
+        self.gridLayout_5.addWidget(self.pushButton_web_update, 8, 0, 1, 3)
+        self.comboBox_stophr = QtWidgets.QComboBox(self.tab_webblocker)
+        self.comboBox_stophr.setObjectName("comboBox_stophr")
+        self.gridLayout_5.addWidget(self.comboBox_stophr, 4, 1, 1, 1)
+
+        self.comboBox_stophr.addItems(hourList)
+
+        self.comboBox_stopmin = QtWidgets.QComboBox(self.tab_webblocker)
+        self.comboBox_stopmin.setObjectName("comboBox_stopmin")
+        self.gridLayout_5.addWidget(self.comboBox_stopmin, 4, 2, 1, 1)
+
+        self.comboBox_stopmin.addItems(minList)
+
+        self.pushButton_web_update.clicked.connect(self.on_click_blocker_btn)
+
         self.tabWidget.addTab(self.tab_webblocker, "")
 
         # dictionary tab
@@ -491,15 +602,14 @@ class Ui_MainWindow(object):
         self.label_min_pomo.setText(_translate("MainWindow", "Minutes"))
         self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_pomodoro), _translate("MainWindow", "Pomodoro"))
-        self.label_blocklist.setText(_translate("MainWindow", "BlockList"))
         self.label_2.setText(_translate("MainWindow", "Start blocking"))
-        self.pushButton_web_update.setText(_translate("MainWindow", "Update"))
         self.label_6.setText(_translate("MainWindow", "Day"))
         self.label_3.setText(_translate("MainWindow", "End blocking"))
-        self.timeEdit.setDisplayFormat(_translate("MainWindow", "HH:mm "))
-        self.timeEdit_2.setDisplayFormat(_translate("MainWindow", "HH:mm "))
         self.plainTextEdit_sites.setPlainText(_translate("MainWindow", "www.facebook.com"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_webblocker), _translate("MainWindow", "WebBlocker"))
+        self.label_blocklist.setText(_translate("MainWindow", "BlockList"))
+        self.pushButton_web_update.setText(_translate("MainWindow", "Update"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_webblocker),
+                                  _translate("MainWindow", "WebBlocker"))
         self.lineEdit_dictsearch_2.setToolTip(_translate("MainWindow", "enter word here"))
         self.pushButton_dictsearch.setText(_translate("MainWindow", "Search"))
         self.label_lookup_2.setText(_translate("MainWindow", "Look up"))
@@ -517,12 +627,15 @@ class Ui_MainWindow(object):
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
         # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
 
+
     def closeEvent(self, event):
         self.stopTimer()
 
 if __name__ == "__main__":
+
     format = "%(asctime)s: %(message)s"
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -538,6 +651,4 @@ if __name__ == "__main__":
 
     # Run the application!
     sys.exit(app.exec_())
-
-
 
