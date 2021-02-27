@@ -12,25 +12,34 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(560, 454)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
+
+        # pomodoro tab
         self.tab_pomodoro = QtWidgets.QWidget()
         self.tab_pomodoro.setObjectName("tab_pomodoro")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.tab_pomodoro)
         self.gridLayout_6.setObjectName("gridLayout_6")
+
+        # minutes selection box
         self.spinBox_pom_min = QtWidgets.QSpinBox(self.tab_pomodoro)
         self.spinBox_pom_min.setMinimum(5)
         self.spinBox_pom_min.setMaximum(200)
         self.spinBox_pom_min.setSingleStep(5)
         self.spinBox_pom_min.setObjectName("spinBox_pom_min")
         self.gridLayout_6.addWidget(self.spinBox_pom_min, 0, 1, 1, 1)
+
+        # time label
         self.label_current_time = QtWidgets.QLabel(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setFamily("Comic Sans MS")
@@ -39,24 +48,32 @@ class Ui_MainWindow(object):
         self.label_current_time.setAlignment(QtCore.Qt.AlignCenter)
         self.label_current_time.setObjectName("label_current_time")
         self.gridLayout_6.addWidget(self.label_current_time, 2, 0, 1, 2)
+
+        # pause button
         self.pb_pause = QtWidgets.QPushButton(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pb_pause.setFont(font)
         self.pb_pause.setObjectName("pb_pause")
         self.gridLayout_6.addWidget(self.pb_pause, 4, 0, 1, 2)
+
+        # start button
         self.pb_start = QtWidgets.QPushButton(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pb_start.setFont(font)
         self.pb_start.setObjectName("pb_start")
         self.gridLayout_6.addWidget(self.pb_start, 3, 0, 1, 2)
+
+        # stop button
         self.pushButton_3 = QtWidgets.QPushButton(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout_6.addWidget(self.pushButton_3, 5, 0, 1, 2)
+
+        # minutes word label
         self.label_min_pomo = QtWidgets.QLabel(self.tab_pomodoro)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -64,10 +81,14 @@ class Ui_MainWindow(object):
         self.label_min_pomo.setAlignment(QtCore.Qt.AlignCenter)
         self.label_min_pomo.setObjectName("label_min_pomo")
         self.gridLayout_6.addWidget(self.label_min_pomo, 0, 0, 1, 1)
+
+        # study - relax toggle button
         self.pushButton_study_toggle = QtWidgets.QPushButton(self.tab_pomodoro)
         self.pushButton_study_toggle.setObjectName("pushButton_study_toggle")
         self.gridLayout_6.addWidget(self.pushButton_study_toggle, 1, 0, 1, 2)
         self.tabWidget.addTab(self.tab_pomodoro, "")
+
+        # web blocker tab
         self.tab_webblocker = QtWidgets.QWidget()
         self.tab_webblocker.setObjectName("tab_webblocker")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.tab_webblocker)
@@ -131,6 +152,8 @@ class Ui_MainWindow(object):
         self.plainTextEdit_sites.setObjectName("plainTextEdit_sites")
         self.gridLayout_5.addWidget(self.plainTextEdit_sites, 7, 1, 1, 1)
         self.tabWidget.addTab(self.tab_webblocker, "")
+
+        # dictionary tab
         self.tab_dictionary = QtWidgets.QWidget()
         self.tab_dictionary.setObjectName("tab_dictionary")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_dictionary)
@@ -183,6 +206,8 @@ class Ui_MainWindow(object):
         self.gridLayout_dictionary_2.addWidget(self.label_searchtern_2, 2, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout_dictionary_2, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab_dictionary, "")
+
+        # to do list tab
         self.tab_todo = QtWidgets.QWidget()
         self.tab_todo.setObjectName("tab_todo")
         self.gridLayout = QtWidgets.QGridLayout(self.tab_todo)
@@ -236,6 +261,8 @@ class Ui_MainWindow(object):
         self.progressBar.setObjectName("progressBar")
         self.gridLayout.addWidget(self.progressBar, 6, 2, 1, 3)
         self.tabWidget.addTab(self.tab_todo, "")
+
+        # about us tab
         self.tab_about_us = QtWidgets.QWidget()
         self.tab_about_us.setObjectName("tab_about_us")
         self.tabWidget.addTab(self.tab_about_us, "")
