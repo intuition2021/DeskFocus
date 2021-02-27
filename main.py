@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyDictionary import PyDictionary
 
 dictonary_options_list = ["definition", "synonym", "antonym"]
 
@@ -30,6 +31,29 @@ class Ui_MainWindow(object):
 
     def stopTimer(self):
         pass
+
+    def searchForWord(self):
+        _translate = QtCore.QCoreApplication.translate
+        word = self.lineEdit_dictsearch_2.text()
+        search_param = str(self.comboBox_lookup_2.currentText())
+
+        if (word == ""):
+            self.label_dictresult.setText(_translate("MainWindow", "Enter search term!"))
+            return
+
+        dictionary = PyDictionary()
+
+        print(dictionary.meaning(word))
+
+        self.label_dictresult.setText(_translate("MainWindow", "moretext"))
+
+        if (search_param == "definition"):
+            self.label_dictresult.setText(_translate("MainWindow", str(dictionary.meaning(word))))
+        elif (search_param == "synonym"):
+            self.label_dictresult.setText(_translate("MainWindow", str(dictionary.synonym(word))))
+        else:
+            self.label_dictresult.setText(_translate("MainWindow", str(dictionary.antonym(word))))
+
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -95,11 +119,11 @@ class Ui_MainWindow(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout_6.addWidget(self.pushButton_3, 5, 0, 1, 2)
 
-        # setting calling method by button
+        # start timer
         self.pb_start.clicked.connect(self.startTimer)
-        # setting calling method by button
+        # pause the timer
         self.pb_pause.clicked.connect(self.pauseTimer)
-        # setting calling method by button
+        # stop the timer
         self.pushButton_3.clicked.connect(self.stopTimer)
 
         # minutes word label
@@ -220,18 +244,20 @@ class Ui_MainWindow(object):
         self.label_lookup_2.setObjectName("label_lookup_2")
         self.gridLayout_dictionary_2.addWidget(self.label_lookup_2, 1, 0, 1, 1)
 
-        self.comboBox_lookup_2_ = QtWidgets.QComboBox(self.tab_dictionary)
-        self.comboBox_lookup_2_.setObjectName("comboBox_lookup_2_")
-        self.gridLayout_dictionary_2.addWidget(self.comboBox_lookup_2_, 1, 1, 1, 1)
+        self.comboBox_lookup_2 = QtWidgets.QComboBox(self.tab_dictionary)
+        self.comboBox_lookup_2.setObjectName("comboBox_lookup_2")
+        self.gridLayout_dictionary_2.addWidget(self.comboBox_lookup_2, 1, 1, 1, 1)
         # add language list for original text
-        self.comboBox_lookup_2_.addItems(dictonary_options_list)
+        self.comboBox_lookup_2.addItems(dictonary_options_list)
 
-        self.textBrowser_dictresult_2 = QtWidgets.QTextBrowser(self.tab_dictionary)
+        self.label_dictresult = QtWidgets.QLabel(self.tab_dictionary)
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.textBrowser_dictresult_2.setFont(font)
-        self.textBrowser_dictresult_2.setObjectName("textBrowser_dictresult_2")
-        self.gridLayout_dictionary_2.addWidget(self.textBrowser_dictresult_2, 4, 1, 1, 1)
+        self.label_dictresult.setFont(font)
+        self.label_dictresult.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_dictresult.setObjectName("label_dictresult")
+        self.label_dictresult.setWordWrap(True)
+        self.gridLayout_dictionary_2.addWidget(self.label_dictresult, 4, 1, 1, 1)
 
         self.label_result_2 = QtWidgets.QLabel(self.tab_dictionary)
         font = QtGui.QFont()
@@ -250,6 +276,10 @@ class Ui_MainWindow(object):
         self.gridLayout_dictionary_2.addWidget(self.label_searchtern_2, 2, 0, 1, 1)
 
         self.gridLayout_2.addLayout(self.gridLayout_dictionary_2, 0, 0, 1, 1)
+
+        # search for word if field not empty
+        self.pushButton_dictsearch.clicked.connect(self.searchForWord)
+
         self.tabWidget.addTab(self.tab_dictionary, "")
 
         # to do list tab
@@ -328,7 +358,7 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_about_us, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
-        
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -360,11 +390,7 @@ class Ui_MainWindow(object):
         self.lineEdit_dictsearch_2.setToolTip(_translate("MainWindow", "enter word here"))
         self.pushButton_dictsearch.setText(_translate("MainWindow", "Search"))
         self.label_lookup_2.setText(_translate("MainWindow", "Look up"))
-        self.textBrowser_dictresult_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.label_dictresult.setText(_translate("MainWindow", "Nothing to see :)"))
         self.label_result_2.setText(_translate("MainWindow", "Result"))
         self.label_searchtern_2.setText(_translate("MainWindow", "Search term"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_dictionary), _translate("MainWindow", "Dictionary"))
