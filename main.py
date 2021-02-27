@@ -1,133 +1,237 @@
 # -*- coding: utf-8 -*-
 
-
-######## imports ########
-
-import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QAction, QTabWidget, QVBoxLayout
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
-
-from PyDictionary import PyDictionary
+# Form implementation generated from reading ui file 'main_window.ui'
+#
+# Created by: PyQt5 UI code generator 5.9.2
+#
+# WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from PyQt5.QtCore import QDateTime, Qt, QTimer
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
-        QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-        QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
-        QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
-        QVBoxLayout, QWidget)
 
-from PyQt5.QtWidgets import QMainWindow, QLabel
-from PyQt5.QtWidgets import QGridLayout, QWidget, QDesktopWidget
+class Ui_MainWindow(object):
 
-import tkinter as tk
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(587, 399)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.tabWidget.setFont(font)
+        self.tabWidget.setObjectName("tabWidget")
+        self.tab_pomodoro = QtWidgets.QWidget()
+        self.tab_pomodoro.setObjectName("tab_pomodoro")
+        self.gridLayout_6 = QtWidgets.QGridLayout(self.tab_pomodoro)
+        self.gridLayout_6.setObjectName("gridLayout_6")
+        self.label_4 = QtWidgets.QLabel(self.tab_pomodoro)
+        font = QtGui.QFont()
+        font.setFamily("8514oem")
+        font.setPointSize(40)
+        self.label_4.setFont(font)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.gridLayout_6.addWidget(self.label_4, 1, 0, 1, 2)
+        self.label_5 = QtWidgets.QLabel(self.tab_pomodoro)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_5.setFont(font)
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.gridLayout_6.addWidget(self.label_5, 0, 0, 1, 1)
+        self.pushButton_2 = QtWidgets.QPushButton(self.tab_pomodoro)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.gridLayout_6.addWidget(self.pushButton_2, 2, 0, 1, 2)
+        self.pushButton = QtWidgets.QPushButton(self.tab_pomodoro)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
+        self.gridLayout_6.addWidget(self.pushButton, 3, 0, 1, 2)
+        self.pushButton_3 = QtWidgets.QPushButton(self.tab_pomodoro)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.gridLayout_6.addWidget(self.pushButton_3, 4, 0, 1, 2)
+        self.spinBox = QtWidgets.QSpinBox(self.tab_pomodoro)
+        self.spinBox.setMinimum(5)
+        self.spinBox.setMaximum(200)
+        self.spinBox.setSingleStep(5)
+        self.spinBox.setObjectName("spinBox")
+        self.gridLayout_6.addWidget(self.spinBox, 0, 1, 1, 1)
+        self.tabWidget.addTab(self.tab_pomodoro, "")
+        self.tab_webblocker = QtWidgets.QWidget()
+        self.tab_webblocker.setObjectName("tab_webblocker")
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.tab_webblocker)
+        self.gridLayout_5.setObjectName("gridLayout_5")
+        self.label = QtWidgets.QLabel(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.gridLayout_5.addWidget(self.label, 7, 0, 1, 1)
+        self.label_3 = QtWidgets.QLabel(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_3.setFont(font)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout_5.addWidget(self.label_3, 4, 0, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_2.setFont(font)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_5.addWidget(self.label_2, 2, 0, 1, 1)
+        self.pushButton_4 = QtWidgets.QPushButton(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.gridLayout_5.addWidget(self.pushButton_4, 8, 0, 1, 2)
+        self.timeEdit = QtWidgets.QTimeEdit(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.timeEdit.setFont(font)
+        self.timeEdit.setObjectName("timeEdit")
+        self.gridLayout_5.addWidget(self.timeEdit, 2, 1, 1, 2)
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.gridLayout_5.addWidget(self.plainTextEdit, 7, 1, 1, 1)
+        self.label_6 = QtWidgets.QLabel(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_6.setFont(font)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout_5.addWidget(self.label_6, 1, 0, 1, 1)
+        self.timeEdit_2 = QtWidgets.QTimeEdit(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.timeEdit_2.setFont(font)
+        self.timeEdit_2.setObjectName("timeEdit_2")
+        self.gridLayout_5.addWidget(self.timeEdit_2, 4, 1, 1, 2)
+        self.comboBox = QtWidgets.QComboBox(self.tab_webblocker)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+
+        self.comboBox.setFont(font)
+        self.comboBox.setObjectName("comboBox")
+        self.gridLayout_5.addWidget(self.comboBox, 1, 1, 1, 1)
+        self.tabWidget.addTab(self.tab_webblocker, "")
+        self.tab_dictionary = QtWidgets.QWidget()
+        self.tab_dictionary.setObjectName("tab_dictionary")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_dictionary)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.gridLayout_dictionary_2 = QtWidgets.QGridLayout()
+        self.gridLayout_dictionary_2.setObjectName("gridLayout_dictionary_2")
+        self.lineEdit_dictsearch_2 = QtWidgets.QLineEdit(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.lineEdit_dictsearch_2.setFont(font)
+        self.lineEdit_dictsearch_2.setText("")
+        self.lineEdit_dictsearch_2.setDragEnabled(True)
+        self.lineEdit_dictsearch_2.setObjectName("lineEdit_dictsearch_2")
+        self.gridLayout_dictionary_2.addWidget(self.lineEdit_dictsearch_2, 2, 1, 1, 1)
+        self.pushButton_5 = QtWidgets.QPushButton(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.gridLayout_dictionary_2.addWidget(self.pushButton_5, 3, 0, 1, 2)
+        self.label_lookup_2 = QtWidgets.QLabel(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_lookup_2.setFont(font)
+        self.label_lookup_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_lookup_2.setObjectName("label_lookup_2")
+        self.gridLayout_dictionary_2.addWidget(self.label_lookup_2, 1, 0, 1, 1)
+        self.comboBox_lookup_2 = QtWidgets.QComboBox(self.tab_dictionary)
+        self.comboBox_lookup_2.setObjectName("comboBox_lookup_2")
+        self.gridLayout_dictionary_2.addWidget(self.comboBox_lookup_2, 1, 1, 1, 1)
+        self.textBrowser_dictresult_2 = QtWidgets.QTextBrowser(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.textBrowser_dictresult_2.setFont(font)
+        self.textBrowser_dictresult_2.setObjectName("textBrowser_dictresult_2")
+        self.gridLayout_dictionary_2.addWidget(self.textBrowser_dictresult_2, 4, 1, 1, 1)
+        self.label_result_2 = QtWidgets.QLabel(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_result_2.setFont(font)
+        self.label_result_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_result_2.setObjectName("label_result_2")
+        self.gridLayout_dictionary_2.addWidget(self.label_result_2, 4, 0, 1, 1)
+        self.label_searchtern_2 = QtWidgets.QLabel(self.tab_dictionary)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_searchtern_2.setFont(font)
+        self.label_searchtern_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_searchtern_2.setObjectName("label_searchtern_2")
+        self.gridLayout_dictionary_2.addWidget(self.label_searchtern_2, 2, 0, 1, 1)
+        self.gridLayout_2.addLayout(self.gridLayout_dictionary_2, 0, 0, 1, 1)
+        self.tabWidget.addTab(self.tab_dictionary, "")
+        self.verticalLayout.addWidget(self.tabWidget)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        self.tabWidget.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "DeskFocus"))
+        self.label_4.setText(_translate("MainWindow", "CURRENT TIME"))
+        self.label_5.setText(_translate("MainWindow", "Minutes"))
+        self.pushButton_2.setText(_translate("MainWindow", "START"))
+        self.pushButton.setText(_translate("MainWindow", "PAUSE"))
+        self.pushButton_3.setText(_translate("MainWindow", "STOP"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_pomodoro), _translate("MainWindow", "Pomodoro"))
+        self.label.setText(_translate("MainWindow", "BlockList"))
+        self.label_3.setText(_translate("MainWindow", "End blocking"))
+        self.label_2.setText(_translate("MainWindow", "Start blocking"))
+        self.pushButton_4.setText(_translate("MainWindow", "Update"))
+        self.timeEdit.setDisplayFormat(_translate("MainWindow", "HH:mm "))
+        self.plainTextEdit.setPlainText(_translate("MainWindow", "www.facebook.com"))
+        self.label_6.setText(_translate("MainWindow", "Day"))
+        self.timeEdit_2.setDisplayFormat(_translate("MainWindow", "HH:mm "))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_webblocker), _translate("MainWindow", "WebBlocker"))
+        self.lineEdit_dictsearch_2.setToolTip(_translate("MainWindow", "enter word here"))
+        self.pushButton_5.setText(_translate("MainWindow", "Search"))
+        self.label_lookup_2.setText(_translate("MainWindow", "Look up"))
+        self.textBrowser_dictresult_2.setHtml(_translate("MainWindow",
+                                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                         "p, li { white-space: pre-wrap; }\n"
+                                                         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.label_result_2.setText(_translate("MainWindow", "Result"))
+        self.label_searchtern_2.setText(_translate("MainWindow", "Search term"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_dictionary), _translate("MainWindow", "Dictionary"))
 
 
-######## Constants ########
+if __name__ == "__main__":
+    import sys
 
-dictonary_options_list = ["definition", "synonym", "antonym"]
-
-
-######## Class for the main window ########
-
-class App(QMainWindow):
-    def get_dimensions(self):
-        root = tk.Tk()
-        self.screen_width = root.winfo_screenwidth()
-        self.screen_height = root.winfo_screenheight()
-
-    def __init__(self):
-        super().__init__()
-
-        self.get_dimensions()
-
-        self.title = 'DeskFocus'
-        self.left = 0
-        self.top = 0
-        self.width = self.screen_width/4
-        self.height = self.screen_height/4
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-
-        self.table_widget = MyTableWidget(self)
-        self.setCentralWidget(self.table_widget)
-
-        qtRectangle = self.frameGeometry()
-        centerPoint = QDesktopWidget().availableGeometry().center()
-        qtRectangle.moveCenter(centerPoint)
-        self.move(qtRectangle.topLeft())
-        qtRectangle = self.frameGeometry()
-        centerPoint = QDesktopWidget().availableGeometry().center()
-        qtRectangle.moveCenter(centerPoint)
-        self.move(qtRectangle.topLeft())
-
-        self.show()
-
-######## Tab widget within main window ########
-
-class MyTableWidget(QWidget):
-
-    def __init__(self, parent):
-        super(QWidget, self).__init__(parent)
-
-        self.originalPalette = QApplication.palette()
-
-        styleComboBox = QComboBox()
-        styleComboBox.addItems(QStyleFactory.keys())
-
-
-        self.layout = QVBoxLayout(self)
-
-        # Initialize tab screen
-        self.tabs = QTabWidget()
-        self.tab_dictionary = QWidget()
-        self.tab_tasklist = QWidget()
-        self.tabs.resize(300, 200)
-
-        # Add tabs
-        self.tabs.addTab(self.tab_dictionary, "📖 Dictionary")
-        self.tabs.addTab(self.tab_tasklist, "🗎 Task List")
-
-        # Create first tab
-        self.tab_dictionary.layout = QVBoxLayout(self)
-        self.pushButton1 = QPushButton("PyQt5 button")
-        self.tab_dictionary.layout.addWidget(self.pushButton1)
-        self.tab_dictionary.setLayout(self.tab_dictionary.layout)
-
-        self.createDictionaryBox()
-
-        # Add tabs to widget
-        self.layout.addWidget(self.tabs)
-        self.setLayout(self.layout)
-
-    def createDictionaryBox(self):
-        self.dict_layout = QtWidgets.QGridLayout()
-
-        # create dictionary options dropdown
-        self.dictionary_dropdown = QtWidgets.QComboBox(self.tab_dictionary)
-
-        # add options for dictionary
-        self.dictionary_dropdown.addItems(dictonary_options_list)
-
-        # adjust parameters of dictionary options dropdown
-        self.dictionary_dropdown.setMaximumSize(QtCore.QSize(407, 16777215))
-        self.dictionary_dropdown.setObjectName("dictionary_dropdown")
-
-        self.dict_layout.addWidget(self.dictionary_dropdown, 0, 1, 1, 1)
-
-
-
-
-    @pyqtSlot()
-    def on_click(self):
-        print("\n")
-        for currentQTableWidgetItem in self.tableWidget.selectedItems():
-            print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
+
