@@ -32,6 +32,7 @@ class Ui_MainWindow(object):
 
     def startTimer(self):
         self.flagTimer = True
+
         # _translate = QtCore.QCoreApplication.translate
         # self.timerRunning = True
         #
@@ -91,19 +92,22 @@ class Ui_MainWindow(object):
     def stopTimer(self):
         print("Timer stopped!")
         self.flagTimer = False
-        self.timeRequired = 0
+        self.timeRequired = int(self.spinBox_pom_min.text()) * 60
         self.label_current_time
         # self.timerRunning = False
 
     # method called by timer
     def showTime(self):
         # checking if flag is true
-        if self.flagTimer:
-            # incrementing the counter
-            self.timeRequired += 1
+        if (self.flagTimer and self.timeRequired != 0):
+            # decrement the counter
+            self.timeRequired -= 1
 
         # getting text from count
-        text = str(self.timeRequired / 10)
+        mins, secs = divmod(self.timeRequired, 60)
+        hours, mins = divmod(mins, 60)
+        text = '{:02d}:{:02d}:{:02d}'.format(hours, mins, secs)
+        # text = str(self.timeRequired / 10)
 
         # showing text
         self.label_current_time.setText(text)
@@ -136,7 +140,7 @@ class Ui_MainWindow(object):
         self.threadRunning = False
         self.timerRunning = False
         self.timerPaused = False
-        self.timeRequired = 0
+        self.timeRequired = 5*60
         self.flagTimer = False
 
         myappid = u'mycompany.myproduct.subproduct.version'  # arbitrary string
@@ -465,10 +469,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "DeskFocus"))
-        self.label_current_time.setText(_translate("MainWindow", "CURRENT TIME"))
+        self.label_current_time.setText(_translate("MainWindow", "00:05:00"))
         self.pb_pause.setText(_translate("MainWindow", "PAUSE"))
         self.pb_start.setText(_translate("MainWindow", "START"))
-        self.pushButton_3.setText(_translate("MainWindow", "STOP"))
+        self.pushButton_3.setText(_translate("MainWindow", "SET"))
         self.label_min_pomo.setText(_translate("MainWindow", "Minutes"))
         self.pushButton_study_toggle.setText(_translate("MainWindow", "Studying"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_pomodoro), _translate("MainWindow", "Pomodoro"))
