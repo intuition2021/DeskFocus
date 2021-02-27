@@ -31,10 +31,11 @@ for i in range(0, 60):
 
     minList.append(strMin)
 
+
 def createSysInfo(daySelected, startTime, endTime):
     systemInfo = {}
 
-    systemInfo['system'] = r"C:\Windows\System32\drivers\etc\hosts"
+    systemInfo['system'] = r'/private/etc/hosts'
 
     # in GUI, create a text box for them to enter all the websites they want to block
     # then over here, parse the information -> make it a json
@@ -54,79 +55,30 @@ def createSysInfo(daySelected, startTime, endTime):
     timeStamp = {}
 
     if os.stat("sysInfo.txt").st_size != 0:
-
         sysInfo = ast.literal_eval(file.read())
         systemInfo["days"] = sysInfo["days"]
         systemInfo["time"] = sysInfo["time"]
         daysNeeded = systemInfo["days"]
         timeStamp = systemInfo["time"]
 
-
     if daySelected not in daysNeeded:
         daysNeeded.append(daySelected)
         systemInfo["days"] = daysNeeded
 
-    if daySelected not in timeStamp:
-        timeStamp[daySelected] = [startTime, endTime]
-        systemInfo["time"] = timeStamp
+    #if daySelected not in timeStamp:
+    timeStamp[daySelected] = [startTime, endTime]
+    systemInfo["time"] = timeStamp
 
     newFile = json.dumps(systemInfo, indent=4)
     with open("sysInfo.txt", "w") as x:
         x.write(newFile)
-    x.close()
 
-def blocker():
-    file = open("sysInfo.txt")
-    sysInfo = ast.literal_eval(file.read())
+    bashCommand = "sudo python blocker.py"
 
-    daysNeeded = sysInfo["days"]
-    timeStamp = sysInfo["time"]
+    child = os.fork()
 
-    redirect = "127.0.0.1"
-    today = dt.today().date().strftime('%A')
-
-    date = dt.now()
-
-    startTime = ""
-    endTime = ""
-    time_range = ""
-
-    timeStrStart = sysInfo["time"][today][0]
-    timeStrEnd = sysInfo["time"][today][1]
-
-    if today in daysNeeded:
-        day = int(date.strftime("%d"))
-        month = int(date.strftime("%m"))
-        year = int(date.strftime("%Y"))
-
-        timeObjStart = dt.strptime(timeStrStart, '%H:%M')
-        timeObjEnd = dt.strptime(timeStrEnd, '%H:%M')
-
-        startTime = timeObjStart.replace(year=year, month=month, day=day)
-        endTime = timeObjEnd.replace(year=year, month=month, day=day)
-
-        time_range = DateTimeRange(startTime, endTime)
-
-    myhost = sysInfo["system"]
-
-    while True:
-        while today in daysNeeded and dt.now() in time_range:
-            with open(myhost, 'r+') as myhostfile:
-                hosts = myhostfile.read()
-                for site in sysInfo["blockSites"]:
-                    if site not in hosts:
-                        myhostfile.write(redirect + ' ' + site + '\n')
-
-        with open(myhost, 'r+') as myhostfile:
-            hosts = myhostfile.readlines()
-            myhostfile.seek(0)
-            for host in hosts:
-                if not any(site in host for site in sysInfo["blockSites"]):
-                    myhostfile.write(host)
-            myhostfile.truncate()
-
-        time.sleep(10)
-
+    if child == 0:
+        os.system(bashCommand)
 
 class Ui_MainWindow(object):
 
@@ -145,9 +97,13 @@ class Ui_MainWindow(object):
         file.write(blockSites)
         file.close()
 
+        print("things: {} {} {} {}".format(daySelected, startTime, endTime, blockSites))
+
         createSysInfo(daySelected, startTime, endTime)
 
-        print("things: {} {} {} {}".format(daySelected, startTime, endTime, blockSites))
+        #worker = threading.Thread(target=createSysInfo(daySelected, startTime, endTime), args=(1,))
+        #worker.start()
+
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -448,12 +404,13 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
 
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
