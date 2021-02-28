@@ -9,7 +9,7 @@ After downloading the application, run
 
 'sudo python main.py'
 
-Next, enter the same password you use to login into your computer. 
+Next, enter the same password you use to log into your computer. 
 (This step is nessassary as the app needs to gain permission from the computer to block websites.)
 
 Website blocker code was adapted from Sajag Chauhan:
