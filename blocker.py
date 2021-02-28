@@ -1,3 +1,4 @@
+# Some parts of the code was adapted from Sajag Chauhan: https://github.com/sajag1999/Website-Blocker-Project
 import ast
 import time
 from datetime import datetime as dt
