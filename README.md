@@ -1,4 +1,6 @@
 # DeskFocus
+![](image/DeskFocus.gif)
+
 An application to help students focus during study sessions while studying remotely
 
 This application is tested to work with MacO. 
