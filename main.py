@@ -258,6 +258,7 @@ class Ui_MainWindow(object):
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(560, 454)
+        MainWindow.setWindowIcon(QtGui.QIcon(".images/DeskFocus.ico"))
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
