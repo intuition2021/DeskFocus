@@ -1,7 +1,7 @@
 # DeskFocus
 An application to help students focus during study sessions while studying remotely. 
 
-This application is tested to work with MacOs. 
+This application is tested to work with macOS. 
 
 The Website Blocker feature for Windows version requires a minor change in the host path for it to work. 
 
