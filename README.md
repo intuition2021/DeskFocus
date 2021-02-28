@@ -16,7 +16,7 @@ Next, enter the same password you use to log into your computer.
 
 :film_strip: Check out our project video [here](https://www.youtube.com/watch?v=Ky1dltMkWzU&feature=emb_title)!
 
-:information_source:  [Devpost Link](https://devpost.com/software/desktranslate) 
+:information_source:  [Devpost Link](https://devpost.com/software/deskfocus) 
 
 ## Inspiration
 During the circuit breaker period many of us found ourselves stuck at home with lots of work to do but no motivation to do it. We often find ourselves distracted with social media, unable to sit down and work for long periods. DeskFocus can help improve productivity with the tried and tested Pomodoro method, as well as a few other features to keep you off the internet and on task.
