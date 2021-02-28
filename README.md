@@ -1,5 +1,5 @@
 # DeskFocus
-![](image/DeskFocus.gif)
+![](https://github.com/intuition2021/DeskFocus/blob/gh-pages/images/DeskFocus.gif)
 
 An application to help students focus during study sessions while studying remotely
 
