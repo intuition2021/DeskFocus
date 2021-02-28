@@ -1,27 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'main_window.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
-
 import ast
-import json
-import os
-import time
-from datetime import datetime as dt
-from datetimerange import DateTimeRange
 import ctypes
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyDictionary import PyDictionary
+import json
 import logging
-from threading import Thread
-import time
-import sys
 import os
+import sys
+
+from PyDictionary import PyDictionary
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
 
 dictonary_options_list = ["definition", "synonym", "antonym"]
 
@@ -63,7 +51,6 @@ def createSysInfo(daySelected, startTime, endTime):
     file = open("sysInfo.txt")
 
     daysNeeded = []
-    sysInfo = ""
     timeStamp = {}
 
     if os.stat("sysInfo.txt").st_size != 0:
@@ -128,58 +115,6 @@ class Ui_MainWindow(object):
     def startTimer(self):
         self.flagTimer = True
         self.msgDelievered = False
-
-        # _translate = QtCore.QCoreApplication.translate
-        # self.timerRunning = True
-        #
-        # if self.timerPaused:
-        #     self.timerPaused = False
-        # else:
-        #     self.timeRequired = int(self.spinBox_pom_min.text()) * 60
-
-        # child = os.fork()
-        #
-        # if child == 0:
-        #     self.timerCountingDown()
-
-        # # # Thread execution point
-        # print("Launching a worker thread...")
-        # if self.thread is not None:
-        #     self.thread.join()
-        #     print("thread joined")
-        #
-        # self.label_current_time.setText(_translate("MainWindow", "what"))
-        #
-        # if not self.threadRunning:
-        #     self.thread = Thread(target=self.timerCountingDown(), args=())
-        #     self.thread.daemon = True
-        #     self.thread.start()
-        #     print("Launched!")
-
-    # obeslete function
-    # def timerCountingDown(self):
-    #     _translate = QtCore.QCoreApplication.translate
-    #     print("timer is counting down")
-    #     while self.timerRunning:
-    #         print("timer entered while")
-    #         self.label_current_time.setText(_translate("MainWindow", "Nice"))
-    #         if self.timerPaused:
-    #             print("stuck in paused")
-    #             continue
-    #         elif self.timeRequired:
-    #             mins, secs = divmod(self.timeRequired, 60)
-    #             hours, mins = divmod(mins, 60)
-    #             timer = '{:02d}:{:02d}:{:02d}'.format(hours, mins, secs)
-    #             print(timer)
-    #             self.label_current_time.setText(_translate("MainWindow", timer))
-    #             self.timeRequired -= 5
-    #             print("tick")
-    #         else:
-    #             print("times up!")
-    #             self.timerRunning = False
-    #             break
-    #
-    #         time.sleep(5)
 
     def pauseTimer(self):
         print("Timer paused!")
@@ -507,81 +442,6 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.tab_dictionary, "")
 
-        # # to do list tab
-        # self.tab_todo = QtWidgets.QWidget()
-        # self.tab_todo.setObjectName("tab_todo")
-        #
-        # self.gridLayout = QtWidgets.QGridLayout(self.tab_todo)
-        # self.gridLayout.setObjectName("gridLayout")
-        #
-        # self.spinBox_index_selector_delete = QtWidgets.QSpinBox(self.tab_todo)
-        # self.spinBox_index_selector_delete.setMinimum(1)
-        # self.spinBox_index_selector_delete.setObjectName("spinBox_index_selector_delete")
-        # self.gridLayout.addWidget(self.spinBox_index_selector_delete, 5, 3, 1, 1)
-        #
-        # self.label_8 = QtWidgets.QLabel(self.tab_todo)
-        # self.label_8.setObjectName("label_8")
-        # self.gridLayout.addWidget(self.label_8, 3, 1, 1, 1)
-        #
-        # self.lineEdit_addtask = QtWidgets.QLineEdit(self.tab_todo)
-        # self.lineEdit_addtask.setObjectName("lineEdit_addtask")
-        # self.gridLayout.addWidget(self.lineEdit_addtask, 0, 3, 1, 1)
-        #
-        # self.dateEdit_duedaete = QtWidgets.QDateEdit(self.tab_todo)
-        # self.dateEdit_duedaete.setObjectName("dateEdit_duedaete")
-        # self.gridLayout.addWidget(self.dateEdit_duedaete, 2, 3, 1, 1)
-        #
-        # self.label_7 = QtWidgets.QLabel(self.tab_todo)
-        # self.label_7.setObjectName("label_7")
-        # self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
-        #
-        # self.spinBox_priority = QtWidgets.QSpinBox(self.tab_todo)
-        # self.spinBox_priority.setMinimum(1)
-        # self.spinBox_priority.setMaximum(5)
-        # self.spinBox_priority.setObjectName("spinBox_priority")
-        # self.gridLayout.addWidget(self.spinBox_priority, 3, 3, 1, 1)
-        #
-        # self.pushButton_addtask = QtWidgets.QPushButton(self.tab_todo)
-        # self.pushButton_addtask.setObjectName("pushButton_addtask")
-        # self.gridLayout.addWidget(self.pushButton_addtask, 3, 4, 1, 1)
-        #
-        # self.label_10 = QtWidgets.QLabel(self.tab_todo)
-        # self.label_10.setObjectName("label_10")
-        # self.gridLayout.addWidget(self.label_10, 5, 1, 1, 1)
-        #
-        # self.pushButton_completedtask = QtWidgets.QPushButton(self.tab_todo)
-        # self.pushButton_completedtask.setObjectName("pushButton_completedtask")
-        # self.gridLayout.addWidget(self.pushButton_completedtask, 5, 4, 1, 1)
-        #
-        # self.scrollArea_listtasks = QtWidgets.QScrollArea(self.tab_todo)
-        # self.scrollArea_listtasks.setWidgetResizable(True)
-        # self.scrollArea_listtasks.setObjectName("scrollArea_listtasks")
-        # self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        # self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 516, 184))
-        # self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-        # self.scrollArea_listtasks.setWidget(self.scrollAreaWidgetContents_2)
-        # self.gridLayout.addWidget(self.scrollArea_listtasks, 4, 1, 1, 4)
-        #
-        # self.label_9 = QtWidgets.QLabel(self.tab_todo)
-        # self.label_9.setObjectName("label_9")
-        # self.gridLayout.addWidget(self.label_9, 2, 1, 1, 1)
-        #
-        # self.label_11 = QtWidgets.QLabel(self.tab_todo)
-        # self.label_11.setObjectName("label_11")
-        # self.gridLayout.addWidget(self.label_11, 6, 1, 1, 1)
-        #
-        # self.progressBar = QtWidgets.QProgressBar(self.tab_todo)
-        # self.progressBar.setProperty("value", 3)
-        # self.progressBar.setObjectName("progressBar")
-        # self.gridLayout.addWidget(self.progressBar, 6, 2, 1, 3)
-        #
-        # self.tabWidget.addTab(self.tab_todo, "")
-
-        # # about us tab
-        # self.tab_about_us = QtWidgets.QWidget()
-        # self.tab_about_us.setObjectName("tab_about_us")
-        # self.tabWidget.addTab(self.tab_about_us, "")
-
         self.verticalLayout.addWidget(self.tabWidget)
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -618,15 +478,6 @@ class Ui_MainWindow(object):
         self.label_result_2.setText(_translate("MainWindow", "Result"))
         self.label_searchtern_2.setText(_translate("MainWindow", "Search term"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_dictionary), _translate("MainWindow", "Dictionary"))
-        # self.label_8.setText(_translate("MainWindow", "Priority"))
-        # self.label_7.setText(_translate("MainWindow", "Task"))
-        # self.pushButton_addtask.setText(_translate("MainWindow", "Add Task"))
-        # self.label_10.setText(_translate("MainWindow", "Index"))
-        # self.pushButton_completedtask.setText(_translate("MainWindow", "Completed!"))
-        # self.label_9.setText(_translate("MainWindow", "Due Date"))
-        # self.label_11.setText(_translate("MainWindow", "Almost there!"))
-        # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_todo), _translate("MainWindow", "Todo"))
-        # self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_about_us), _translate("MainWindow", "About Us"))
 
 
     def closeEvent(self, event):
@@ -643,12 +494,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    # MainWindow.hide()
-
-    # # SplashScreenWindow
-    # splash_screen_window = SplashScreenWindow(MainWindow)
-    # splash_screen_window.show()
-    # QTimer.singleShot(2500, splash_screen_window.close)
 
     # Run the application!
     sys.exit(app.exec_())
