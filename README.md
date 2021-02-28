@@ -1,6 +1,17 @@
 # DeskFocus
 An application to help students focus during study sessions while studying remotely
 
+This application is tested to work with MacO. 
+
+The Website Blocker feature for Windows version requires a minor change in the host path for it to work. 
+
+After downloading the application, run
+
+`sudo python main.py`
+
+Next, enter the same password you use to log into your computer. 
+(This step is nessassary as the app needs to gain permission from the computer to block websites.)
+
 ## Inspiration
 During the circuit breaker period many of us found ourselves stuck at home with lots of work to do but no motivation to do it. We often find ourselves distracted with social media, unable to sit down and work for long periods. DeskFocus can help improve productivity with the tried and tested Pomodoro method, as well as a few other features to keep you off the internet and on task.
 
