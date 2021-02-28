@@ -15,6 +15,7 @@ Next, enter the same password you use to log into your computer.
 (This step is nessassary as the app needs to gain permission from the computer to block websites.)
 
 :film_strip: Check out our project video [here](https://www.youtube.com/watch?v=Ky1dltMkWzU&feature=emb_title)!
+
 :information_source:  [Devpost Link](https://devpost.com/software/desktranslate) 
 
 ## Inspiration
