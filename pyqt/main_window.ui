@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>560</width>
+    <height>406</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DeskFocus</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="tab_pomodoro">
+       <attribute name="title">
+        <string>Pomodoro</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="spinBox_pom_min">
+          <property name="minimum">
+           <number>5</number>
+          </property>
+          <property name="maximum">
+           <number>200</number>
+          </property>
+          <property name="singleStep">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="label_current_time">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <pointsize>40</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>CURRENT TIME</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QPushButton" name="pb_pause">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>PAUSE</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QPushButton" name="pb_start">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>START</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>STOP</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_min_pomo">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Minutes</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_study_toggle">
+          <property name="text">
+           <string>Study</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_webblocker">
+       <attribute name="title">
+        <string>WebBlocker</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="2" column="1">
+         <widget class="QComboBox" name="comboBox_starthr"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Start blocking</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Day</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>End blocking</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QComboBox" name="comboBox_startmin"/>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QComboBox" name="comboBox_webday_dropdown">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="2">
+         <widget class="QPlainTextEdit" name="plainTextEdit_sites">
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="plainText">
+           <string>www.facebook.com</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_blocklist">
+          <property name="maximumSize">
+           <size>
+            <width>90</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>BlockList</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="3">
+         <widget class="QPushButton" name="pushButton_web_update">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Update</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="comboBox_stophr"/>
+        </item>
+        <item row="4" column="2">
+         <widget class="QComboBox" name="comboBox_stopmin"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_dictionary">
+       <attribute name="title">
+        <string>Dictionary</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_dictionary_2">
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_dictsearch_2">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>enter word here</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="dragEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_dictsearch">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Search</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_lookup_2">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Look up</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_lookup_2_"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_result_2">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Result</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_searchtern_2">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Search term</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_todo">
+       <attribute name="title">
+        <string>Todo</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Task</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2" colspan="3">
+         <widget class="QProgressBar" name="progressBar">
+          <property name="value">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Priority</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="lineEdit_addtask"/>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDateEdit" name="dateEdit_duedaete"/>
+        </item>
+        <item row="5" column="4">
+         <widget class="QPushButton" name="pushButton_completedtask">
+          <property name="text">
+           <string>Completed!</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Almost there!</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QSpinBox" name="spinBox_index_selector_delete">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QSpinBox" name="spinBox_priority">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Index</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QPushButton" name="pushButton_addtask">
+          <property name="text">
+           <string>Add Task</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="4">
+         <widget class="QScrollArea" name="scrollArea_listtasks">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>516</width>
+             <height>136</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Due Date</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_about_us">
+       <attribute name="title">
+        <string>About Us</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
